@@ -2,16 +2,16 @@
 
 ### iTerm2
 
-Text:
+##### Text:
   Hack Nerd Font Mono, Regular 16
 
-Window:
+##### Window:
   Transparency: 21
   Blur: 25
   Blending: 100
 
-#
-Global Packages:
+### Global Packages
+
   typescript-language-server
   vscode-langservers-extracted
   typescript
