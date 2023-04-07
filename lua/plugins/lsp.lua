@@ -5,7 +5,6 @@ lsp.preset("recommended")
 
 lsp.on_attach(function(client, bufnr)
   lsp.default_keymaps({buffer = bufnr})
-  lsp.buffer_autoformat()
 end)
 
 lsp.ensure_installed({
@@ -17,42 +16,40 @@ lsp.ensure_installed({
 local cmp_mappings = lsp.defaults.cmp_mappings()
 
 cmp_mappings['<Tab>'] = nil
-cmp_mappings['<S-Tab>'] = nil
+-- cmp_mappings['<S-Tab>'] = nil
 
 lsp.setup_nvim_cmp({
   mapping = cmp_mappings,
 })
 
--- Fix Undefined global 'vim'
-lsp.configure('lua-language-server', {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
-})
-
-lspconfig.eslint.setup({
-  on_attach = function(client, bufnr)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      command = "EslintFixAll",
-    })
-  end,
-})
-
 lsp.format_on_save({
   servers = {
-    ['lua_ls'] = {'lua'},
-    ['rust_analyzer'] = {'rust'},
-    ['eslint'] = {'typescript', 'typescriptreact', 'javascript', 'javascriptreact'},
+    ['null-ls'] = {'javascript', 'typescript', 'lua'},
   }
 })
 
 lsp.setup()
 
-vim.diagnostic.config({
-    virtual_text = true
+local null_ls = require('null-ls')
+
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.formatting.stylua,
+    null_ls.builtins.diagnostics.eslint_d.with({
+      condition = function(utils)
+        return utils.root_has_file(".eslintrc.json")
+      end,
+    })
+  }
+})
+
+require('mason-null-ls').setup({
+  ensure_installed = {
+    'stylua',
+    'prettier',
+    'eslint_d',
+  },
+  automatic_installation = true,
+  automatic_setup = false,
 })

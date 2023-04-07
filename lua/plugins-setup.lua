@@ -1,4 +1,3 @@
--- auto install packer if not installed
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -9,10 +8,9 @@ local ensure_packer = function()
   end
   return false
 end
-local packer_bootstrap = ensure_packer() -- true if packer was just installed
 
--- autocommand that reloads neovim and installs/updates/removes plugins
--- when file is saved
+local packer_bootstrap = ensure_packer()
+
 vim.cmd([[ 
   augroup packer_user_config
     autocmd!
@@ -20,17 +18,17 @@ vim.cmd([[
   augroup end
 ]])
 
--- add list of plugins to install
 return require('packer').startup(function(use)
-  -- packer can manage itself
   use("wbthomason/packer.nvim")
 
-  -- use {
-  --   "williamboman/mason.nvim",
-  --   config = function()
-  --     require("mason").setup()
-  --   end
-  -- }
+  use("nvim-lua/plenary.nvim")
+
+  use {
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end
+  }
 
   use { 
     "nvim-telescope/telescope.nvim", branch = "0.1.x",
@@ -39,19 +37,34 @@ return require('packer').startup(function(use)
     -- },
   }
 
+  
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-
-  use("nvim-lua/plenary.nvim")
+  
+  use {
+    "jose-elias-alvarez/null-ls.nvim",
+    "jay-babu/mason-null-ls.nvim",
+  }
 
   use("ThePrimeagen/harpoon")
 
-  use ({
-    "eddyekofo94/gruvbox-flat.nvim",
+  use {
+    "catppuccin/nvim",
+    as = "catppuccin",
     config = function()
-      vim.cmd("colorscheme gruvbox-flat")
-      vim.g.gruvbox_flat_style = "hard"
+      require("catppuccin").setup({
+        flavour = 'macchiato'
+      })
+      vim.cmd("colorscheme catppuccin")
     end
-  })
+  }
+
+  -- use ({
+  --   "eddyekofo94/gruvbox-flat.nvim",
+  --   config = function()
+  --     vim.cmd("colorscheme gruvbox-flat")
+  --     vim.g.gruvbox_flat_style = "hard"
+  --   end
+  -- })
 
   use {
 	  'VonHeikemen/lsp-zero.nvim',
@@ -85,16 +98,13 @@ return require('packer').startup(function(use)
 
   use("nvim-tree/nvim-tree.lua")
 
-  use("nvim-tree/nvim-web-devicons")
-
   use {
     "nvim-lualine/lualine.nvim",
-    requires = { 'nvim-tree/nvim-web-devicons', opt = true },
     config = function()
       require("lualine").setup({
         options = {
-          theme = "gruvbox"
-        }
+          theme = "catppuccin",
+        },
       })
     end
   }
@@ -104,4 +114,8 @@ return require('packer').startup(function(use)
   use("nvim-treesitter/nvim-treesitter-context")
 
   use("github/copilot.vim")
+
+  if packer_bootstrap then
+    require('packer').sync()
+  end
 end)
