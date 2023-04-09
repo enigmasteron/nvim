@@ -3,7 +3,7 @@
 ### iTerm2
 
 ##### Text:
-  Hack Nerd Font Mono, Regular 16
+  Operator Mono, Light/Bold 16
 
 ##### Window:
   Transparency: 21
