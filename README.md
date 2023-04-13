@@ -3,10 +3,10 @@
 ### iTerm2
 
 ##### Text:
-  Operator Mono, Light/Bold 16
+  Operator Mono, Light/Bold 18
 
 ##### Window:
-  Transparency: 21
+  Transparency: 10
   Blur: 25
   Blending: 100
 
