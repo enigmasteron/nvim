@@ -97,6 +97,7 @@ return require("packer").startup(function(use)
 	})
 
 	use("nvim-tree/nvim-tree.lua")
+	use("nvim-tree/nvim-web-devicons")
 
 	use({
 		"nvim-lualine/lualine.nvim",
@@ -113,7 +114,7 @@ return require("packer").startup(function(use)
 	use("nvim-treesitter/playground")
 	use("nvim-treesitter/nvim-treesitter-context")
 
-	use("github/copilot.vim")
+	-- use("github/copilot.vim")
 
 	if packer_bootstrap then
 		require("packer").sync()
