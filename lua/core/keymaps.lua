@@ -19,7 +19,8 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- -- nvim-tree
-vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
+vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
+vim.keymap.set("n", "<leader>f", ":NvimTreeFindFile<CR>")
 
 -- -- telescope git commands (not on youtube nvim video)
 -- keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<cr>") -- list all git commits (use <cr> to checkout) ["gc" for git commits]

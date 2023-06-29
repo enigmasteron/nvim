@@ -52,7 +52,7 @@ return require("packer").startup(function(use)
 		as = "catppuccin",
 		config = function()
 			require("catppuccin").setup({
-				flavour = "macchiato",
+				flavour = "mocha",
 			})
 			vim.cmd("colorscheme catppuccin")
 		end,
@@ -99,6 +99,8 @@ return require("packer").startup(function(use)
 	use("nvim-tree/nvim-tree.lua")
 	use("nvim-tree/nvim-web-devicons")
 
+	use("christoomey/vim-tmux-navigator")
+
 	use({
 		"nvim-lualine/lualine.nvim",
 		config = function()
@@ -114,7 +116,7 @@ return require("packer").startup(function(use)
 	use("nvim-treesitter/playground")
 	use("nvim-treesitter/nvim-treesitter-context")
 
-	-- use("github/copilot.vim")
+	use("github/copilot.vim")
 
 	if packer_bootstrap then
 		require("packer").sync()

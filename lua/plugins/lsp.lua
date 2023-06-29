@@ -79,6 +79,10 @@ require("mason-null-ls").setup({
 		"eslint_d",
 		"cspell",
 	},
-	automatic_installation = true,
+	automatic_installation = {
+		exclude = {
+			"rustfmt",
+		},
+	},
 	automatic_setup = false,
 })
