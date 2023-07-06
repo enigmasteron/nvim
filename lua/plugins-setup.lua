@@ -22,6 +22,12 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
 	use("nvim-lua/plenary.nvim")
+	use({
+		"nvim-pack/nvim-spectre",
+		config = function()
+			require("spectre").setup()
+		end,
+	})
 
 	use({
 		"williamboman/mason.nvim",
