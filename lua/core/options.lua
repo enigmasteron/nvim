@@ -1,3 +1,5 @@
+vim.cmd('set shortmess+=I')
+
 vim.opt.guicursor = ""
 
 vim.opt.relativenumber = true
