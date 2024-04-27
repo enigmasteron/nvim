@@ -8,23 +8,6 @@ local EnigmaSteronGroup = augroup("enigmasteron", {})
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup("HighlightYank", {})
 
--- autocmd('TextYankPost', {
---     group = yank_group,
---     pattern = '*',
---     callback = function()
---         vim.highlight.on_yank({
---             higroup = 'IncSearch',
---             timeout = 40,
---         })
---     end,
--- })
-
--- autocmd({"BufWritePre"}, {
---     group = EnigmaSteronGroup,
---     pattern = "*",
---     command = [[%s/\s\+$//e]],
--- })
-
 autocmd("LspAttach", {
 	group = EnigmaSteronGroup,
 	callback = function(e)
@@ -52,7 +35,8 @@ autocmd("LspAttach", {
 		vim.keymap.set("n", "<space>e", function()
 			vim.diagnostic.open_float()
 		end, opts)
-		-- vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
+		vim.keymap.set("n", "<leader>vca", function()
+			vim.lsp.buf.code_action()
+		end, opts)
 	end,
 })
-

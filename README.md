@@ -8,7 +8,4 @@
 ##### Window:
 
 ### Global Packages
-  typescript-language-server
   vscode-langservers-extracted
-  typescript
-
