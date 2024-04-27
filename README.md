@@ -3,7 +3,7 @@
 ### kitty
 
 ##### Text:
-  OperatorMono Bold, 18
+  OperatorMono Medium, 18
 
 ##### Window:
 
