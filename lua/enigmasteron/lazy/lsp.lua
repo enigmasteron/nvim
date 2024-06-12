@@ -60,9 +60,8 @@ return {
 
 		require("lspconfig").eslint.setup({
 			on_attach = function(client, bufnr)
-				vim.api.nvim_create_autocmd("BufWritePre", {
+				vim.keymap.set("n", "<leader>l", ":EslintFixAll<CR>", {
 					buffer = bufnr,
-					command = "EslintFixAll",
 				})
 			end,
 		})
