@@ -140,9 +140,15 @@ return {
 			},
 			mapping = cmp.mapping.preset.insert({
 				["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-				["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+				-- Ctrl-n: open the menu if it is closed, otherwise select the next item
+				["<C-n>"] = cmp.mapping(function()
+					if cmp.visible() then
+						cmp.select_next_item(cmp_select)
+					else
+						cmp.complete()
+					end
+				end, { "i" }),
 				["<C-y>"] = cmp.mapping.confirm({ select = true }),
-				["<C-Space>"] = cmp.mapping.complete(),
 			}),
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
